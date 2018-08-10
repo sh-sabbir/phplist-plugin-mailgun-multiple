@@ -1,8 +1,8 @@
-# Mailgun Plugin #
+# Multiple Mailgun Plugin #
 
 ## Description ##
 
-This plugin sends emails through Mailgun using their API.
+This plugin sends emails through Mailgun using their API and Supports adding multiple API to send from multiple domain!
 
 ## Installation ##
 
@@ -22,21 +22,21 @@ The benefit of this is that plugins will not be affected when you upgrade phplis
 
 ### Install through phplist ###
 The recommended way to install is through the Plugins page (menu Config > Manage Plugins) using the package
-URL `https://github.com/bramley/phplist-plugin-mailgun/archive/master.zip`.
+URL `https://github.com/sh-sabbir/phplist-plugin-mailgun-multiple/archive/master.zip`.
 The installation should create
 
-* the file Mailgun.php
-* the directory Mailgun
+* the file MultipleMailgun.php
+* the directory MultipleMailgun
 
 ### Install manually ###
 If the automatic installation does not work then you can install manually.
-Download the plugin zip file from <https://github.com/bramley/phplist-plugin-mailgun/archive/master.zip>
+Download the plugin zip file from <https://github.com/sh-sabbir/phplist-plugin-mailgun-multiple/archive/master.zip>
 
 Expand the zip file, then copy the contents of the plugins directory to your phplist plugins directory.
 This should contain
 
-* the file Mailgun.php
-* the directory Mailgun
+* the file MultipleMailgun.php
+* the directory MultipleMailgun
 
 ## Usage ##
 
@@ -55,5 +55,6 @@ This plugin is free but if you install and find it useful then a donation to sup
 ## Version history ##
 
     version         Description
+    1.1.2           Added Support for Multiple API
     1.0.1+20180609  Handle an exception when sending
     1.0.0+20170608  Initial release
