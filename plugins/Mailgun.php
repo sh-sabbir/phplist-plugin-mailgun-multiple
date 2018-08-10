@@ -37,11 +37,18 @@ class Mailgun extends phplistPlugin implements EmailSender
     /*
      *  Inherited variables
      */
-    public $name = 'Mailgun Plugin';
-    public $authors = 'Duncan Cameron';
+    public $name = 'Multiple Mailgun Plugin';
+    public $authors = 'Sabbir Hasan';
     public $description = 'Send emails through Mailgun';
     public $documentationUrl = 'https://resources.phplist.com/plugin/mailgun';
     public $settings = array(
+        'mailgun_sender_email' => array(
+            'value' => '',
+            'description' => 'Sender Email',
+            'type' => 'text',
+            'allowempty' => false,
+            'category' => 'Mailgun',
+        ),
         'mailgun_api_key' => array(
             'value' => '',
             'description' => 'API key',
@@ -52,6 +59,27 @@ class Mailgun extends phplistPlugin implements EmailSender
         'mailgun_domain' => array(
             'value' => '',
             'description' => 'Domain',
+            'type' => 'text',
+            'allowempty' => false,
+            'category' => 'Mailgun',
+        ),
+        'mailgun_sender_email_2' => array(
+            'value' => '',
+            'description' => 'Sender Email 2',
+            'type' => 'text',
+            'allowempty' => false,
+            'category' => 'Mailgun',
+        ),
+        'mailgun_api_key_2' => array(
+            'value' => '',
+            'description' => 'API key 2',
+            'type' => 'text',
+            'allowempty' => false,
+            'category' => 'Mailgun',
+        ),
+        'mailgun_domain_2' => array(
+            'value' => '',
+            'description' => 'Domain 2',
             'type' => 'text',
             'allowempty' => false,
             'category' => 'Mailgun',
@@ -104,10 +132,21 @@ class Mailgun extends phplistPlugin implements EmailSender
     {
         static $client = null;
         static $domain;
-
-        if ($client === null) {
-            $client = \Mailgun\Mailgun::create(getConfig('mailgun_api_key'));
+        static $apiKey;
+        static $senderMail = strtolower($phpmailer->From);
+        
+        if($senderMail === strtolower(getConfig('mailgun_sender_email'))){
+            $apiKey = getConfig('mailgun_api_key');
             $domain = getConfig('mailgun_domain');
+        }else{
+            $apiKey = getConfig('mailgun_api_key_2');
+            $domain = getConfig('mailgun_domain_2');
+        }
+        
+        if ($client === null) {
+            //$client = \Mailgun\Mailgun::create(getConfig('mailgun_api_key'));
+            $client = \Mailgun\Mailgun::create($apiKey);
+            //$domain = getConfig('mailgun_domain');
         }
         $to = $phpmailer->getToAddresses();
         $parameters = [
